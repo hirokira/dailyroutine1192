@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- thymeleafを使うため以下を記述する。以後はth:xxxとすればthymeleafのメソッドが使用可能。 -->
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>日課共有アプリケーション</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
+    <style>
+      .cover {
+        background: url(img/bg.png);
+        background-size: cover;
+
+      }
+
+    </style>
+</head>
+<body>
+	<header th:fragment="header">
+		<div th:if=${msg!=null} class="alert alert-info text-center mb-0 rounded-0 alert-dismissible fade show">
+			<span th:text="${msg}"></span>
+			<button class="close" data-dismiss="alert">
+			  &times;
+			</button>
+		</div>
+		<div class="bg-dark py-3">
+		  <nav class="navbar navbar-expand-sm navbar-light">
+			<h2><a th:href="@{/routine/top}" th:text="TOPページ" class="navbar-brand  text-light"></a></h2>
+			<button class="navbar-toggler" data-toggle="collapse" data-target="#menu">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+			<div id="menu" class="collapse navbar-collapse">
+			  <ul class="navbar-nav">
+			    <li class="nav-item"><span th:text="|ログインユーザー：${session.account.accountname}|" class="nav-link  text-light pr-5"></span></li>
+			    <li class="nav-item"><a th:href="@{/routine/new}" th:text="新規ROUTINE作成" class="nav-link  text-light pr-5">Link</a></li>
+			    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a th:href="@{/account/index}" th:text="アカウント一覧" class="nav-link  text-light pr-5"></a></li>
+			    <li class="nav-item"><a th:href="@{/account/show/{accountid}(accountid=${session.account.accountid})}" th:text="アカウント情報" class="nav-link  text-light  pr-5"></a></li>
+			    <!-- SpringSecurity導入後、動作しなくなった為、一旦使用不可に変更---2021/06/07 Add
+			    <li class="nav-item"><a th:href="@{/contact}" th:text="お問い合わせ" class="nav-link  text-light pr-5"></a></li>
+			     -->
+			    <li class="nav-item ">
+			    	<form role="form" id="logout" th:action="@{/logout}" method="post">
+    					<a href="javascript:logout.submit()"  th:text="ログアウト" class="nav-link text-light pr-5">ログアウト</a>
+					</form>
+			    </li>
+
+			  </ul>
+			</div>
+		  </nav>
+
+		</div>
+
+		<!--  -->
+		<div class="text-dark text-center">
+			<h1><a th:href="@{/routine/index}" th:text="DailyRoutineAPP" class="display-4 mb-4 text-dark text-decoration-none "></a></h1>
+			<!-- <a href="" class="btn btn-primary btn-lg">Get It Now!</a> -->
+		</div>
+	</header>
+
+<section class="bg-light text-center py-5" sec:authorize="hasRole('ROLE_ADMIN')">
+	<h2 class="text-white py-3" style=background:gray>アカウント一覧</h2>
+
+	<div class="container">
+		<table class="table table-hover table-bordered">
+			<thead class="thead-light">
+				<tr>
+					<th>アカウントID</th>
+					<th>アカウント表示名</th>
+					<th>権限(ADMIN)</th>
+					<th>詳細を見る</th>
+				</tr>
+			</thead>
+
+			<tr th:each="list : ${list}" class="content_tr">
+				<td th:text="${list.accountid}" ></td>
+				<td th:text="${list.accountname}"></td>
+				<td th:text="${list.admin}"></td>
+				<td><a th:href="@{/account/show/{accountid}(accountid=${list.accountid})}" class="btn btn-primary btn-sm">詳細確認</a></td>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- 以降がページネーション部分 -->
+
+	<nav aria-label="Page navigation" th:fragment="pagenation">
+	  <ul class="pagination pagination-lg justify-content-center ">
+	    <li th:if="${page.first}" style="display:inline;" class="page-item disabled">
+	      <span class="page-link">&lt;&lt;前</span>
+	    </li>
+	    <li th:if="${!page.first}" style="display:inline;" class="page-item">
+	      <a class="page-link page-item" th:href="@{''(page = ${page.number} - 1)} "> &lt;&lt;前 </a>
+	    </li>
+
+
+	    <li  th:if="${list.size!=0}"
+	      th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}" style="display:inline; margin-left:10px;" class="page-item"
+	    >
+	      <span th:if="${i} == ${page.number}" th:text="${i + 1}" class="page-link">1</span>
+	      <a class="page-link" th:if="${i} != ${page.number}"  th:href="@{''(page = ${i})}">
+	        <span th:text="${i+1}" >1</span>
+	      </a>
+	    </li>
+
+
+	    <li th:if="${page.last}" style="display:inline; margin-left:10px;" class="page-item disabled">
+	      <span class="page-link">次&gt;&gt;</span>
+	    </li>
+	    <li th:if="${!page.last}" style="display:inline; margin-left:10px;" class="page-item">
+	      <a class="page-link" th:href="@{''(page = (${page.number} + 1))}">次&gt;&gt;</a>
+	    </li>
+	  </ul>
+	</nav>
+</section>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
