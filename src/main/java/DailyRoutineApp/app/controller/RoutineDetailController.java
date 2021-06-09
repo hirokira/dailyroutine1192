@@ -109,7 +109,7 @@ public class RoutineDetailController {
 			session.setAttribute("msg", "RoutineContentの削除が完了しました");  //---セッションに完了メッセージ登録
 			mav=new ModelAndView("redirect:/routine/index");
 		}else {
-			mav.setViewName("error_");
+			mav.setViewName("error");
 		}
 		return mav;
 	}
