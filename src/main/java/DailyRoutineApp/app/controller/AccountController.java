@@ -80,7 +80,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value="/account/new",method=RequestMethod.GET)
 	public ModelAndView acNew(ModelAndView mav) {
-		mav.setViewName("/account/acNew");
+		mav.setViewName("account/acNew");
 		Account ac = new Account();		//---空のモデル作成
 		mav.addObject("formModel", ac);		//---空モデルをセット
 		return mav;
@@ -100,7 +100,7 @@ public class AccountController {
 			session.setAttribute("msg", "アカウントの登録が完了しました。");	//---セッションに完了メッセージ登録
 			res = new ModelAndView("redirect:/login");				//---リダイレクト
 		}else {														//---入力不備などがあった場合の処理
-			mav.setViewName("/account/acNew");
+			mav.setViewName("account/acNew");
 			mav.addObject("formModel", account);
 			mav.addObject("result", result);
 			msgList = acLogicService.acCheckMsg(account);				//---アカウントID、アカウント名が重複時のメッセージをリストに追加するメソッド
@@ -120,7 +120,7 @@ public class AccountController {
 		Account account = acService.findById(accountid);	//---アカウント情報取得
 		//---ログインユーザー名と、取得したアカウント名が一致する,または権限がADMIN,USER権限を持っている場合処理を行う。
 		if(account.getAccountname().equals(user.getUsername()) || user.getAuthorities().size()==2) {
-			mav.setViewName("/account/acShow");
+			mav.setViewName("account/acShow");
 			mav.addObject("formModel", account);				//---アカウント情報をViewへ送る
 		}else {
 			mav.setViewName("error");
@@ -134,7 +134,7 @@ public class AccountController {
 	@RequestMapping(value="/account/edit",method=RequestMethod.POST)
 	public ModelAndView acEdit(@RequestParam("accountid")String accountid,ModelAndView mav) {
 		Account account = acService.findById(accountid);	//---アカウント情報取得
-		mav.setViewName("/account/acEdit");
+		mav.setViewName("account/acEdit");
 		mav.addObject("formModel", account);				//---アカウント情報をViewへ送る
 		return mav;
 	}
@@ -154,7 +154,7 @@ public class AccountController {
 			res = new ModelAndView("redirect:/routine/top");							//---Viewをセット
 			session.setAttribute("msg", "アカウント情報の更新が完了しました。");//---セッションに完了メッセージ登録
 		}else {
-			mav.setViewName("/account/acEdit");								//---VIEWをセット
+			mav.setViewName("account/acEdit");								//---VIEWをセット
 			mav.addObject("formModel", account);							//---Modelを追加
 			mav.addObject("result", result);								//---バリデーション結果のエラーを設置
 			mav.addObject("msgList", acLogicService.acUpdateCheckMsg(account,account.getAccountid(),pass));

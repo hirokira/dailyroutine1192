@@ -178,7 +178,7 @@ public class RoutineController {
 	public ModelAndView routineNew(ModelAndView mav) {
 		D_Routine routine = new D_Routine();
 		mav.addObject("formModel", routine);
-		mav.setViewName("/routine/routineNew");
+		mav.setViewName("routine/routineNew");
 		return mav;
 	}
 
@@ -193,9 +193,9 @@ public class RoutineController {
 //			Account account = acService.findById("hiro");
 			routine.setAccount(ac);
 			d_service.insert(routine);
-			mav.setViewName("/routine/routineSuccess");
+			mav.setViewName("routine/routineSuccess");
 		}else {
-			mav.setViewName("/routine/routineNew");
+			mav.setViewName("routine/routineNew");
 			mav.addObject("formModel", routine);
 		}
 		return mav;
@@ -210,7 +210,7 @@ public class RoutineController {
 		List<Routine_Detail> detailList = detailImpl.findListByRoutineId(routineid);	//---Routineの内容一覧をRoutine_Detailから取得
 		mav.addObject("detailList", detailList);
 		mav.addObject("formModel", routine);
-		mav.setViewName("/routine/routineShow");
+		mav.setViewName("routine/routineShow");
 		return mav;
 	}
 
@@ -244,7 +244,7 @@ public class RoutineController {
 		D_Routine routine = d_service.findById(routineid);								//---routineidに該当するRoutine詳細を取得
 		List<Routine_Detail> detailList = detailImpl.findListByRoutineId(routineid);	//---Routineの内容一覧をRoutine_Detailから取得
 
-		mav.setViewName("/routine/routineShow");
+		mav.setViewName("routine/routineShow");
 		mav.addObject("formModel", routine);
 		mav.addObject("detailList", detailList);
 		return mav;

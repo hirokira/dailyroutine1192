@@ -41,7 +41,7 @@ public class RoutineDetailController {
 		Routine_Detail detail = new Routine_Detail();
 		detail.setD_routine(d_service.findById(id));
 		mav.addObject("formModel", detail);
-		mav.setViewName("/detail/detailNew");
+		mav.setViewName("detail/detailNew");
 		return mav;
 	}
 
@@ -59,7 +59,7 @@ public class RoutineDetailController {
 			res = new ModelAndView("redirect:/routine/index");
 		}else {
 			mav.addObject("formModel", contents);
-			mav.setViewName("/detail/detailNew");
+			mav.setViewName("detail/detailNew");
 			res = mav;
 		}
 		return res;
@@ -72,7 +72,7 @@ public class RoutineDetailController {
 	public ModelAndView contentEdit(@RequestParam("r_Detailid")Integer id,ModelAndView mav) {
 		Routine_Detail detailObj = detailService.findById(id);		//---ルーティン内容IDと一致するルーティン内容情報取得
 		mav.addObject("formModel", detailObj);
-		mav.setViewName("/detail/detailEdit");
+		mav.setViewName("detail/detailEdit");
 		return mav;
 	}
 
@@ -91,7 +91,7 @@ public class RoutineDetailController {
 			res = new ModelAndView("redirect:/routine/index");
 		}else {
 			mav.addObject("formModel", contents);
-			mav.setViewName("/detail/detailEdit");
+			mav.setViewName("detail/detailEdit");
 			res = mav;
 		}
 		return res;
