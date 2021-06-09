@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
         http
         .authorizeRequests()
-        	.antMatchers("/account/new").permitAll()//test用(ユーザーリスト)※終わったら消す。
+        	.antMatchers("/account/new","/account/create").permitAll()//test用(ユーザーリスト)※終わったら消す。
             .anyRequest().authenticated()//上記以外は全て認証無しの場合アクセス不許可
             .and()
         .formLogin()
