@@ -43,7 +43,7 @@ public class LoginController {
 
 	@RequestMapping(value="/hello",method=RequestMethod.GET)
 	public ModelAndView hello(ModelAndView mav) {
-		mav.setViewName("hello");
+		mav.setViewName("/account/hello");
 		return mav;
 	}
 
