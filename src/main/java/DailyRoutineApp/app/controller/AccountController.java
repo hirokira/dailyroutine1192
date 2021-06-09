@@ -49,7 +49,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value="/account/index2",method = RequestMethod.GET)
 	public ModelAndView acIndex(ModelAndView mav) {
-		mav.setViewName("/account/acIndex");
+		mav.setViewName("account/acIndex");
 		List<Account> list = acService.acAll();
 		mav.addObject("list", list);
 		if(session.getAttribute("msg")!=null) {					//---セッションにメッセージが登録されていればVIEWへ送り、セッションは削除する
@@ -64,7 +64,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value="/account/index",method=RequestMethod.GET)
 	public ModelAndView acIndexPage(ModelAndView mav,@PageableDefault(page=0,size=10)Pageable pageable) {
-		mav.setViewName("/account/acIndex");
+		mav.setViewName("account/acIndex");
 		Page<Account> list = impl.acAll(pageable);
 		mav.addObject("page", list);
 		mav.addObject("list", list.getContent());
