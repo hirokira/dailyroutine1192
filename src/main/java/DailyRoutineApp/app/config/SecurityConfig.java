@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		web.ignoring().antMatchers("/img/neko.png",
 									"/css/**",
 									"/js/script.js",
-									"template/account/acNew.html"
+									"..template/account/acNew.html"
 									);
 	}
 
