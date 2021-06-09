@@ -78,7 +78,7 @@ public class AccountController {
 	/*
 	 * アカウント新規作成画面
 	 */
-	@RequestMapping(value="/account/new",method=RequestMethod.GET)
+	@RequestMapping(value="/new",method=RequestMethod.GET)
 	public ModelAndView acNew(ModelAndView mav) {
 		mav.setViewName("/account/acNew");
 		Account ac = new Account();		//---空のモデル作成
