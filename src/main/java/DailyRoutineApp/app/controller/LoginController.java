@@ -39,4 +39,10 @@ public class LoginController {
 		return "login";
 	}
 
+
+	@RequestMapping(value="/hello",method=RequestMethod.GET)
+	public String hello(Model model) {
+		return "hello";
+	}
+
 }
