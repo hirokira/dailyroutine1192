@@ -33,7 +33,6 @@ public class MailSampleController {
         msg.setTo("study.test011616@gmail.com"); // 適宜変更してください
         msg.setSubject("お問い合わせがありました");
         msg.setText("お問い合わせは下記の通りです。\n\n---------------------------\n" + body + "\n---------------------------");
-        System.out.println(body);
         mailSender.send(msg);
         return Arrays.asList("OK");
     }

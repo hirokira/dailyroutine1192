@@ -8,21 +8,26 @@ $(document).ready(function() {
             data[e.name] = e.value;
         });
         // Ajaxを使ってメールを送信
+        let token = $('input[name="_csrf"]').val();
         $.ajax({
-            type: "POST",
-            url: "./sendmail",
-            dataType: "json",
+            type: 'POST',
+            url: './sendmail',
+            dataType: 'json',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            scriptCharset: 'utf-8',
-            success: function(outdata, dataType) {
-                if (outdata[0] == "OK") alert("メール送信しました");
-                $("#btnSend").prop("disabled", false);
+            scriptCharset: 'UTC',
+            headers: {
+              'X-CSRF-TOKEN': token,
+              'X-XSRF-TOKEN': token,
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Error : " + errorThrown);
-                $("#btnSend").prop("disabled", false);
-            }
-        });
+            success: function (outdata, dataType) {
+              if (outdata[0] == 'OK') alert('メール送信しました');
+              $('#btnSend').prop('disabled', false);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+              alert('Error : ' + errorThrown);
+              $('#btnSend').prop('disabled', false);
+            },
+          });
     });
 });

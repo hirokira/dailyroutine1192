@@ -41,9 +41,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 			    <li class="nav-item"><a th:href="@{/routine/new}" th:text="新規ROUTINE作成" class="nav-link  text-light pr-5">Link</a></li>
 			    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a th:href="@{/account/index}" th:text="アカウント一覧" class="nav-link  text-light pr-5"></a></li>
 			    <li class="nav-item"><a th:href="@{/account/show/{accountid}(accountid=${session.account.accountid})}" th:text="アカウント情報" class="nav-link  text-light  pr-5"></a></li>
-			    <!-- SpringSecurity導入後、動作しなくなった為、一旦使用不可に変更---2021/06/07 Add
+			    <!-- SpringSecurity導入後、動作しなくなった為、一旦使用不可に変更---2021/06/07 Add -->
 			    <li class="nav-item"><a th:href="@{/contact}" th:text="お問い合わせ" class="nav-link  text-light pr-5"></a></li>
-			     -->
+
 			    <li class="nav-item ">
 			    	<form role="form" id="logout" th:action="@{/logout}" method="post">
     					<a href="javascript:logout.submit()"  th:text="ログアウト" class="nav-link text-light pr-5">ログアウト</a>

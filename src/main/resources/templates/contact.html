@@ -65,6 +65,7 @@
           <button type="button" name="btnSubmit"
                   class="btn btn-success " id="btnSend">送信する</button>
         </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
       </form>
     </div>
   </div>
