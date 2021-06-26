@@ -24,14 +24,14 @@ public class D_RoutineDaoImpl implements D_RoutineDao{
 	private JdbcTemplate jdbc;
 
 	@PersistenceContext
-	private EntityManager em;//----EntityManager使用する
+	private EntityManager em;//----EntityManager使用
 
 	@Override
 	public void insert(D_Routine routine) throws DataAccessException {
 		// TODO 自動生成されたメソッド・スタブ
-		String sql = "INSERT INTO D_routine(title,nicepnt,account_accountid,description,currenttime) Values(?,?,?,?,?)";
+		String sql = "INSERT INTO D_routine(title,nicepnt,account_accountid,description,currenttime) Values(?,?,?,?,CURRENT_TIMESTAMP())";
 
-		jdbc.update(sql, routine.getTitle(),routine.getNicepnt(),routine.getAccount().getAccountid(),routine.getDescription(),routine.getCurrenttime());
+		jdbc.update(sql, routine.getTitle(),routine.getNicepnt(),routine.getAccount().getAccountid(),routine.getDescription());
 	}
 
 	@Override
