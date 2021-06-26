@@ -30,7 +30,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 			<div class="form-group row">
 				<label class="col-sm-3 col-form-label font-weight-bold text-right">Routine Content：</label>
 				<div class="col-sm-6">
-					<input type="text" name="content" th:value="*{content}" class="form-control"/>
+					<input type="text" name="content" th:value="*{content}" class="form-control" autofocus="autofocus"  placeholder="ルーティン内容"/>
 				</div>
 			<input type = "hidden" name="r_Detailid" th:value="*{r_Detailid}" />
 			<input type = "hidden" name="success_cnt" th:value="*{success_cnt}" />

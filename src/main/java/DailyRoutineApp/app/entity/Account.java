@@ -31,7 +31,7 @@ public class Account {
 
 //	@NotNull
 //	@NotEmpty(message="パスワードは必須項目です")
-	@Length(min=1,message="パスワードは必須項目です。")
+	@Length(min=8,message="パスワードは８文字以上必須です。")
 	@Column(nullable=false)
 	private String password;
 
