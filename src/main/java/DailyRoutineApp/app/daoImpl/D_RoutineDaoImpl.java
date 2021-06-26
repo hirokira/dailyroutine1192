@@ -29,9 +29,9 @@ public class D_RoutineDaoImpl implements D_RoutineDao{
 	@Override
 	public void insert(D_Routine routine) throws DataAccessException {
 		// TODO 自動生成されたメソッド・スタブ
-		String sql = "INSERT INTO D_routine(title,nicepnt,account_accountid,description,currenttime) Values(?,?,?,?,CURRENT_TIMESTAMP())";
+		String sql = "INSERT INTO D_routine(title,nicepnt,account_accountid,description,currenttime) Values(?,?,?,?,?)";
 
-		jdbc.update(sql, routine.getTitle(),routine.getNicepnt(),routine.getAccount().getAccountid(),routine.getDescription());
+		jdbc.update(sql, routine.getTitle(),routine.getNicepnt(),routine.getAccount().getAccountid(),routine.getDescription(),routine.getCurrenttime());
 	}
 
 	@Override
