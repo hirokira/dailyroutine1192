@@ -24,7 +24,7 @@ public class D_RoutineDaoImpl implements D_RoutineDao{
 	private JdbcTemplate jdbc;
 
 	@PersistenceContext
-	private EntityManager em;//----EntityManager使用
+	private EntityManager em;//----EntityManager使用する
 
 	@Override
 	public void insert(D_Routine routine) throws DataAccessException {
