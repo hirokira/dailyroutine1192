@@ -41,6 +41,15 @@
 		<p th:text="アカウントをお持ちではありませんか？"></p>
 		<a th:href="@{/account/new}" class="text-success font-weight-bold" th:text="アカウントを作成"></a>
 	</div>
+
+	<div class="pb-3">
+		<form role="form" id="login" th:action="@{/login}" method="post" class="pt-5">
+			 <input type="hidden" id="username" name="username" value="admin"/>
+			 <input type="hidden" id="password" name="password" value="admin" />
+	         <button type="submit" class="btn btn-primary">ゲストログイン(管理者)</button>
+	     </form>
+
+	</div>
 </section>
 
     <!-- Optional JavaScript -->

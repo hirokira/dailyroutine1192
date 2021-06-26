@@ -37,7 +37,7 @@ public class Account {
 
 //	@NotNull
 //	@NotEmpty(message="アカウント名は必須項目です")
-	@Length(min=1,max=20,message="アカウント名は1文字以上20文字未満です。")
+	@Length(min=1,max=12,message="アカウント表示名は1文字以上12文字未満です。")
 	@Column(nullable=false)
 	private String accountname;
 

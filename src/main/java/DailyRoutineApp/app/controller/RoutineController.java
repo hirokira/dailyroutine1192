@@ -195,6 +195,10 @@ public class RoutineController {
 		mav.addObject("detailList", detailList);
 		mav.addObject("formModel", routine);
 		mav.setViewName("routine/routineShow");
+		if(session.getAttribute("msg")!=null) {					//---セッションにメッセージが登録されていればVIEWへ送り、セッションは削除する
+			mav.addObject("msg", session.getAttribute("msg"));
+			session.removeAttribute("msg");						//---msgのセッション削除
+		}
 		return mav;
 	}
 

@@ -47,6 +47,30 @@ public class RoutineDetailController {
 
 	/*
 	 * ルーティン詳細作成処理
+	 * 　　作成完了後、ルーティン一覧画面へリダイレクト
+	 * ---2021/06/26 ルーティン詳細画面へリダイレクトの方が使い勝手が良い為、削除
+	 */
+//	@RequestMapping(value="/content/create",method=RequestMethod.POST)
+//	public ModelAndView contentCreate(@ModelAttribute("formModel")@Validated Routine_Detail contents,
+//									BindingResult result,
+//									@RequestParam("d_routineid")Integer id,ModelAndView mav) {
+//		ModelAndView res = null;
+//		contents.setD_routine(d_service.findById(id));			//---ルーティンIDと一致するルーティンをcontentsに追加
+//		if(!result.hasErrors()) {
+//			impl.insert(contents);								//---インサート処理
+//			session.setAttribute("msg", "RoutineContentの作成が完了しました。");	//---セッションに完了メッセージ登録
+//			res = new ModelAndView("redirect:/routine/index");
+//		}else {
+//			mav.addObject("formModel", contents);
+//			mav.setViewName("detail/detailNew");
+//			res = mav;
+//		}
+//		return res;
+//	}
+
+	/*
+	 * ルーティン詳細作成処理
+	 * 　　作成完了後、ルーティン詳細画面へリダイレクト
 	 */
 	@RequestMapping(value="/content/create",method=RequestMethod.POST)
 	public ModelAndView contentCreate(@ModelAttribute("formModel")@Validated Routine_Detail contents,
@@ -56,7 +80,8 @@ public class RoutineDetailController {
 		contents.setD_routine(d_service.findById(id));			//---ルーティンIDと一致するルーティンをcontentsに追加
 		if(!result.hasErrors()) {
 			impl.insert(contents);								//---インサート処理
-			res = new ModelAndView("redirect:/routine/index");
+			session.setAttribute("msg", "RoutineContentの作成が完了しました。");	//---セッションに完了メッセージ登録
+			res = new ModelAndView("redirect:/routine/show/"+id);
 		}else {
 			mav.addObject("formModel", contents);
 			mav.setViewName("detail/detailNew");
@@ -88,7 +113,7 @@ public class RoutineDetailController {
 		if(!result.hasErrors()) {
 			detailService.update(contents);						//---アップデート処理
 			session.setAttribute("msg", "RoutineContentの編集が完了しました。");	//---セッションに完了メッセージ登録
-			res = new ModelAndView("redirect:/routine/index");
+			res = new ModelAndView("redirect:/routine/show/"+id);
 		}else {
 			mav.addObject("formModel", contents);
 			mav.setViewName("detail/detailEdit");
