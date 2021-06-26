@@ -24,7 +24,7 @@ public class Account {
 
 
 	@Id
-//	@NotEmpty(message="アカウントIDは必須項目です")
+//	@NotEmpty(message="アカウントIDは必須項目ですa")
 	@Length(min=4,max=10,message="アカウントIDは4文字以上10文字未満です。")
 	@Column(nullable=false,unique=true)
 	private String accountid;
