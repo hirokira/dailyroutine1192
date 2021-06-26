@@ -154,22 +154,6 @@ public class RoutineController {
 		return mav;
 	}
 
-	/*
-	 * イイネ押下時の処理(カードでRoutine一覧表示)
-	 * 　2021/05/30 Add：ページネーション実装メソッド作成に伴い、削除
-	 */
-//	@RequestMapping(value="/routine/index2",method=RequestMethod.POST)
-//	public ModelAndView routineIndexCardPost2(@RequestParam("routineid")Integer id,ModelAndView mav) {
-//		D_Routine routine = d_service.findById(id);
-//		routine.setNicepnt(component.nicePntAdd(routine));
-//		d_service.update(routine);
-//		List<D_Routine> list = d_service.findAll();
-//		mav.addObject("list", list);
-//		mav.addObject("title", "Routine一覧");
-//		mav.addObject("msg", "いいね！ しました。");
-//		mav.setViewName("card");
-//		return mav;
-//	}
 
 	/*
 	 * 新規Routine登録画面
