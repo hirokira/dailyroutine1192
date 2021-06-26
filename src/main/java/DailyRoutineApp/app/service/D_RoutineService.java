@@ -29,6 +29,7 @@ public class D_RoutineService {
 	 */
 	@Transactional
 	public void insert(D_Routine routine) {
+		routine.setCurrenttime(new Timestamp(System.currentTimeMillis()));     // 現在の日時を取得
 		impl.insert(routine);
 	}
 
